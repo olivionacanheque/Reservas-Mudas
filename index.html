@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Artora Mudas - produção e venda de mudas de árvores ornamentais em Malema.">
+  <title>Artora Mudas | Árvores que dão vida</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="cabecalho">
+    <a class="marca" href="#inicio">Artora<span>Mudas</span></a>
+    <nav aria-label="Navegação principal">
+      <a href="#inicio">Início</a>
+      <a href="#plantas">Nossas mudas</a>
+    </nav>
+    <div class="cabecalho-apresentacao" id="inicio">
+      <h1>Dê mais vida ao seu <span>quintal ou jardim.</span></h1>
+      <p>A Artora Mudas produz e comercializa mudas de árvores ornamentais para tornar os seus espaços exteriores mais verdes, bonitos e acolhedores.</p>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="secao plantas" id="plantas">
+      <div class="reserva-cabecalho">
+        <p class="etiqueta">Escolha as suas mudas</p>
+        <h2>Faça a sua reserva</h2>
+        <p>Indique a quantidade pretendida de cada espécie e preencha os seus dados para concluir a reserva.</p>
+      </div>
+      <section class="reserva" id="reserva" aria-label="Formulário de reserva">
+        <form id="form-reserva">
+          <div class="campos-cliente">
+            <label>Nome completo
+              <input type="text" name="nome" autocomplete="name" required maxlength="150">
+            </label>
+            <label>Contacto telefónico
+              <input type="tel" name="telefone" autocomplete="tel" required maxlength="15" inputmode="numeric" pattern="[0-9]{9,15}" title="Introduza apenas números (9 a 15 algarismos).">
+            </label>
+            <label>Localidade / Bairro
+              <input type="text" name="localidade" autocomplete="address-level2" maxlength="150" placeholder="Ex.: Bairro de Mpeneca">
+            </label>
+            <label>Próximo de?
+              <input type="text" name="referencia" maxlength="150" placeholder="Ex.: escola, mercado, igreja...">
+            </label>
+            <label class="campo-largo data-recebimento-label">Data pretendida para receber as mudas
+              <input type="date" name="data_recebimento" id="data-recebimento" lang="pt-MZ" autocomplete="off" required aria-label="Data para receber; seleccione dia, mês e ano">
+            </label>
+          </div>
+
+          <div class="quantidades-cabecalho" aria-hidden="true">
+            <span>Espécies</span>
+          </div>
+          <div class="quantidades">
+            <div class="quantidade-item">
+              <img class="quantidade-imagem" src="imagens/arvore-regia.jpeg" alt="Muda de Régia">
+              <div class="quantidade-detalhe"><label for="q-regia">Régia</label><small>100 MT por muda</small></div>
+              <div class="quantidade-controle">
+                <label class="rotulo-quantidade" for="q-regia">Quantidade</label>
+                <input id="q-regia" type="number" placeholder="Ex.: 5" name="regia" min="0" max="10000" step="1" inputmode="numeric" aria-label="Quantidade de mudas Régia">
+              </div>
+            </div>
+            <div class="quantidade-item">
+              <img class="quantidade-imagem" src="imagens/arvore-bailarina.jpeg" alt="Muda de Bailarina">
+              <div class="quantidade-detalhe"><label for="q-bailarina">Bailarina</label><small>100 MT por muda</small></div>
+              <div class="quantidade-controle">
+                <label class="rotulo-quantidade" for="q-bailarina">Quantidade</label>
+                <input id="q-bailarina" type="number" placeholder="Ex.: 5" name="bailarina" min="0" max="10000" step="1" inputmode="numeric" aria-label="Quantidade de mudas Bailarina">
+              </div>
+            </div>
+            <div class="quantidade-item">
+              <img class="quantidade-imagem" src="imagens/arvore-millettia.jpeg" alt="Muda de Millettia">
+              <div class="quantidade-detalhe"><label for="q-millettia">Millettia</label><small>100 MT por muda</small></div>
+              <div class="quantidade-controle">
+                <label class="rotulo-quantidade" for="q-millettia">Quantidade</label>
+                <input id="q-millettia" type="number" placeholder="Ex.: 5" name="millettia" min="0" max="10000" step="1" inputmode="numeric" aria-label="Quantidade de mudas Millettia">
+              </div>
+            </div>
+          </div>
+
+          <div class="resumo-reserva" aria-live="polite">
+            <span id="total-mudas">Total de mudas: 0</span>
+            <strong id="valor-estimado">Valor estimado: 0 MT</strong>
+          </div>
+<button class="botao-submeter" id="botao-submeter" type="submit">
+            <span>Submeter reserva</span>
+          </button>
+          <p class="mensagem-formulario" id="mensagem-formulario" role="status" aria-live="polite"></p>
+          <p class="nota-seguranca">Os seus dados serão utilizados apenas para tratar esta reserva.</p>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <footer id="contacto">
+    <div>
+      <a class="marca marca-rodape" href="#inicio">Artora<span>Mudas</span></a>
+      <p>Produção e venda de mudas de árvores ornamentais.</p>
+    </div>
+    <div class="contacto">
+      <h3>Contacto e localização</h3>
+      <p>Distrito de Malema, Moçambique</p>
+    </div>
+    <p class="direitos">© 2026 Artora Mudas. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    (() => {
+      const form = document.getElementById('form-reserva');
+      if (!form) return;
+
+      const quantityFields = ['regia', 'bailarina', 'millettia'];
+      const prices = { regia: 100, bailarina: 100, millettia: 100 };
+      const money = value =>
+        new Intl.NumberFormat('pt-MZ').format(value) + ' MT';
+
+      const totalElement = document.getElementById('total-mudas');
+      const valueElement = document.getElementById('valor-estimado');
+      const message = document.getElementById('mensagem-formulario');
+      const dateInput = form.elements.data_recebimento;
+
+      // Preenche a data actual; o navegador apresenta dia, mês e ano em segmentos separados.
+      function todayISO() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+      dateInput.value = todayISO();
+      dateInput.min = todayISO();
+
+      function getQuantities() {
+        return Object.fromEntries(
+          quantityFields.map(field => [
+            field,
+            Math.max(0, Math.min(10000, parseInt(form.elements[field].value, 10) || 0))
+          ])
+        );
+      }
+
+      function updateSummary() {
+        const quantities = getQuantities();
+        const total = Object.values(quantities).reduce((sum, value) => sum + value, 0);
+        const estimated = quantityFields.reduce(
+          (sum, field) => sum + quantities[field] * prices[field], 0
+        );
+        totalElement.textContent = `Total de mudas: ${total}`;
+        valueElement.textContent = `Valor estimado: ${money(estimated)}`;
+        return { quantities, total, estimated };
+      }
+
+      quantityFields.forEach(field => {
+        const input = form.elements[field];
+        input.addEventListener('input', () => {
+          input.value = input.value.replace(/[^0-9]/g, '').slice(0, 5);
+          updateSummary();
+        });
+      });
+
+      function isValidFutureOrTodayDate(value) {
+        return /^\d{4}-\d{2}-\d{2}$/.test(value) && value >= todayISO();
+      }
+
+      dateInput.addEventListener('change', () => {
+        dateInput.setCustomValidity(
+          isValidFutureOrTodayDate(dateInput.value)
+            ? ''
+            : 'Seleccione uma data válida de hoje em diante.'
+        );
+      });
+
+      form.elements.telefone.addEventListener('input', event => {
+        event.target.value = event.target.value.replace(/[^0-9]/g, '').slice(0, 15);
+      });
+
+      ['nome', 'localidade', 'referencia'].forEach(field => {
+        form.elements[field].addEventListener('input', event => {
+          event.target.value = event.target.value
+            .replace(/[0-9]/g, '')
+            .toLocaleUpperCase('pt-MZ');
+        });
+      });
+
+      updateSummary();
+
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        message.textContent = '';
+        message.className = 'mensagem-formulario';
+
+        if (!isValidFutureOrTodayDate(dateInput.value)) {
+          dateInput.setCustomValidity('Seleccione uma data válida de hoje em diante.');
+        } else {
+          dateInput.setCustomValidity('');
+        }
+        if (!form.reportValidity()) return;
+
+        const { quantities, total, estimated } = updateSummary();
+        if (total === 0) {
+          message.textContent = 'Seleccione pelo menos uma muda para efectuar a reserva.';
+          message.classList.add('erro');
+          return;
+        }
+
+        const data = Object.fromEntries(new FormData(form).entries());
+        const text = [
+          'Olá, Artora Mudas! Pretendo efectuar uma reserva:',
+          '',
+          `Nome: ${data.nome}`,
+          `Contacto: ${data.telefone}`,
+          `Localidade/Bairro: ${data.localidade || 'Não indicado'}`,
+          `Próximo de: ${data.referencia || 'Não indicado'}`,
+          `Data pretendida para receber: ${data.data_recebimento ? data.data_recebimento.split('-').reverse().join('/') : ''}`,
+          '',
+          `Régia: ${quantities.regia} muda(s)`,
+          `Bailarina: ${quantities.bailarina} muda(s)`,
+          `Millettia: ${quantities.millettia} muda(s)`,
+          '',
+          `TOTAL DE MUDAS: ${total}`,
+          `VALOR ESTIMADO: ${money(estimated)}`
+        ].join('\n');
+
+        const whatsappUrl =
+          'https://wa.me/258869005050?text=' + encodeURIComponent(text);
+        // Abre o WhatsApp na mesma aba; o cliente confirma o envio no WhatsApp.
+        window.location.href = whatsappUrl;
+
+        message.textContent =
+          'A reserva foi preparada no WhatsApp. Confirme os dados e carregue em Enviar para concluir.';
+        message.classList.add('sucesso');
+      });
+    })();
+  </script>
+</body>
+</html>
