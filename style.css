@@ -174,7 +174,7 @@ h2 {
   grid-template-columns: 170px minmax(150px, 1fr) 120px;
   align-items: end;
   gap: 24px;
-  margin: 30px 14px 10px;
+  margin: 0 14px 10px;
   color: #294c35;
   font-size: 1.18rem;
   line-height: 1.25;
@@ -395,118 +395,4 @@ footer a { color: #c3d58c; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .botao-submeter { animation: none; }
-}
-
-/* ===== Ajustes robustos para telemóveis ===== */
-@media (max-width: 760px) {
-  *, *::before, *::after { box-sizing: border-box; }
-  body { overflow-x: hidden; }
-  .secao { padding: 34px 4% 48px; }
-  .reserva {
-    width: 100%;
-    max-width: 100%;
-    padding: clamp(12px, 3.5vw, 22px);
-    overflow: hidden;
-  }
-  .campos-cliente {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
-  }
-  .campos-cliente > label,
-  .campos-cliente input { min-width: 0; width: 100%; }
-  .quantidades-cabecalho {
-    display: block;
-    margin: 22px 2px 12px;
-    font-size: 1.05rem;
-  }
-  .quantidades { gap: 12px; }
-  .quantidade-item {
-    grid-template-columns: minmax(78px, 30%) minmax(0, 1fr);
-    grid-template-areas: "imagem detalhe" "imagem controle";
-    align-items: center;
-    gap: 8px 12px;
-    width: 100%;
-    min-width: 0;
-    padding: 12px;
-  }
-  .quantidade-imagem {
-    grid-area: imagem;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    max-width: 130px;
-    min-width: 0;
-  }
-  .quantidade-detalhe {
-    grid-area: detalhe;
-    min-width: 0;
-    padding: 0;
-    overflow-wrap: anywhere;
-  }
-  .quantidade-detalhe label { font-size: 1.04rem; }
-  .quantidade-item small { font-size: .86rem; overflow-wrap: anywhere; }
-  .quantidade-controle {
-    grid-area: controle;
-    width: 100%;
-    min-width: 0;
-    gap: 5px;
-  }
-  .rotulo-quantidade {
-    text-align: left;
-    white-space: normal;
-    font-size: .95rem;
-  }
-  .quantidade-item input {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    min-height: 48px;
-    padding: 10px 8px;
-    font-size: 16px; /* evita zoom automático no iPhone */
-  }
-  .resumo-reserva {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 6px;
-    margin: 16px 0;
-    padding: 12px;
-    overflow-wrap: anywhere;
-  }
-  .botao-submeter {
-    width: min(100%, 280px);
-    min-width: 0;
-    min-height: 52px;
-    margin: 18px auto 0;
-    padding: 13px 16px;
-    font-size: .95rem;
-    overflow-wrap: anywhere;
-  }
-  .mensagem-formulario, .nota-seguranca {
-    max-width: 100%;
-    overflow-wrap: anywhere;
-  }
-  footer { grid-template-columns: minmax(0, 1fr); }
-  .direitos { grid-column: auto; }
-}
-@media (max-width: 420px) {
-  .secao { padding-right: 3%; padding-left: 3%; }
-  .reserva { padding: 10px; border-radius: 12px; }
-  .quantidade-item {
-    grid-template-columns: minmax(70px, 28%) minmax(0, 1fr);
-    gap: 8px 10px;
-    padding: 10px;
-  }
-  .quantidade-imagem { max-width: 105px; }
-  .quantidade-detalhe label { font-size: .98rem; }
-  .quantidade-item small { font-size: .8rem; }
-  .rotulo-quantidade { font-size: .9rem; }
-  .botao-submeter { width: min(100%, 260px); }
-}
-
-
-/* Mais espaço entre a data pretendida e o título das espécies */
-@media (max-width: 760px) {
-  .quantidades-cabecalho {
-    margin-top: 30px;
-  }
 }
